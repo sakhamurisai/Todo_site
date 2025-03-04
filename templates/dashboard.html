@@ -1,0 +1,17 @@
+<!-- dashboard page -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Your To-Do List</h2>
+<form method="POST">
+    <input type="text" name="task" required placeholder="New Task">
+    <button type="submit">Add</button>
+</form>
+<ul>
+    {% for task in tasks %}
+    <li>
+        {{ task.task[:20] }} - {{ task.created_at.strftime('%Y-%m-%d %H:%M') }}
+        <a href="{{ url_for('delete_task', task_id=task.id) }}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
